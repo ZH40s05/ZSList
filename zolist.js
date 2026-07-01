@@ -80,7 +80,7 @@ const ROUND_LAYOUT = {
   switchH: 68,
   switchKnobR: 20,
   ctrlSize: 64,
-  tapMove: 10,
+  tapMove: 0,
   pressAlpha: 71,
   focusBgW: 452,
   focusBgRadius: 37,
@@ -114,7 +114,7 @@ const SCALE_LAYOUT_KEYS = [
   'padL', 'padR', 'headerPadX', 'headerSubPadX', 'headerTop', 'headerTitleGap',
   'headerSubH', 'headerSubBottomPad', 'iconSize', 'iconGap', 'rowGap', 'rowSingle', 'rowMulti', 'headerH', 'footerH',
   'catH', 'arrowW', 'arrowH', 'switchW', 'switchH', 'switchKnobR', 'ctrlSize',
-  'tapMove', 'focusBgW', 'focusBgRadius', 'focusGlowW', 'focusGlowH',
+  'focusBgW', 'focusBgRadius', 'focusGlowW', 'focusGlowH',
   'imageMax', 'imagePadY', 'imageFocusLine', 'footerBtnY',
 ]
 
@@ -535,8 +535,7 @@ export class ListPage {
     }
     if (p === listProp.SCROLL_Y) {
       const maxScroll = Math.max(0, this.cursor - this.h)
-      this._scrollPos = Math.max(0, Math.min(v || 0, maxScroll))
-      this.vc.pos_y = -this._scrollPos
+      this._setScrollY(Math.max(0, Math.min(v || 0, maxScroll)))
       return this
     }
     return this
@@ -545,7 +544,7 @@ export class ListPage {
   getProperty(p) {
     if (p === listProp.HEADER_TEXT) return this._headerText
     if (p === listProp.FOCUS_INDEX) return this.focusIdx
-    if (p === listProp.SCROLL_Y) return -(this.vc.pos_y || 0)
+    if (p === listProp.SCROLL_Y) return this._getScrollY()
     if (p === listProp.HEIGHT) return this.cursor
     return undefined
   }
@@ -1003,8 +1002,34 @@ export class ListPage {
     }
   }
 
+  _getScrollY() {
+    let posY
+    try {
+      if (typeof this.vc.pos_y === 'number') posY = this.vc.pos_y
+    } catch (e) {}
+    if (typeof posY !== 'number') {
+      try {
+        const more = this.vc.getProperty(prop.MORE, {}) || {}
+        if (typeof more.pos_y === 'number') posY = more.pos_y
+      } catch (e) {}
+    }
+    if (typeof posY !== 'number') return this._scrollPos || 0
+    this._scrollPos = Math.max(0, -posY)
+    return this._scrollPos
+  }
+
+  _setScrollY(v) {
+    this._scrollPos = Math.max(0, v || 0)
+    const posY = -Math.round(this._scrollPos)
+    try {
+      this.vc.setProperty(prop.MORE, { pos_y: posY })
+    } catch (e) {
+      try { this.vc.pos_y = posY } catch (err) {}
+    }
+  }
+
   _nearestToCenter() {
-    const centerY = -(this.vc.pos_y || 0) + this.h / 2
+    const centerY = this._getScrollY() + this.h / 2
     let best = -1, bestD = Infinity
     for (let i = 0; i < this.focusables.length; i++) {
       const f = this.focusables[i]
@@ -1023,13 +1048,14 @@ export class ListPage {
 
   _animateScroll(target) {
     if (this._scrollAnim) { clearInterval(this._scrollAnim); this._scrollAnim = null }
-    this._scrollPos = -(this.vc.pos_y || 0)
+    this._scrollPos = this._getScrollY()
     this._keyScrolling = true
+    this._dragging = false
     const step = () => {
       this._scrollPos += (target - this._scrollPos) * 0.35
       const done = Math.abs(target - this._scrollPos) < 0.5
       if (done) this._scrollPos = target
-      this.vc.pos_y = -Math.round(this._scrollPos)
+      this._setScrollY(this._scrollPos)
       if (done) {
         clearInterval(this._scrollAnim)
         this._scrollAnim = null

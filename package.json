@@ -1,6 +1,6 @@
 {
   "name": "@zh40s05/zepp-official-list",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "ZeppOS 官方风格列表页面控件 / Official-style list page control for ZeppOS",
   "main": "zolist.js",
   "repository": {

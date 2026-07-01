@@ -326,11 +326,13 @@ const height = list.getProperty(listProp.HEIGHT)
 - SELECT/HOME 长按超过 1 秒取消触发
 - 触屏点按显示黑色按下遮罩
 - 按键触发不显示按下遮罩
-- 手指滑动开始隐藏焦点；松手后焦点落到屏幕中心最近项
+- 触屏按下后只要发生实际移动就取消本次点击，避免滚动时误触发
+- 手指滑动或表冠/滚轮滚动开始后隐藏焦点；滚动停止后焦点落到屏幕中心最近项
 - display-only `TEXT` / `IMAGE` / `CATEGORY` 进入焦点序列，但不显示焦点框、不触发动作
 - `header: false` 不创建 header
 - `footer: false` 不创建 footer
 - `hideStatusBar` 默认隐藏状态栏
+- Touch tap is cancelled on any actual pointer movement to avoid accidental row activation while scrolling
 
 ### 资源
 
