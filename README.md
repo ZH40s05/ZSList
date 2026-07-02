@@ -134,7 +134,7 @@ const list = createListPage({
 | `button` | 是否显示居中的帮助按钮 | `false` |
 | `click_func` | 帮助按钮点击/确认回调 | noop |
 
-Footer 高度会随 layout profile 变化：圆屏基准 `188px`，方屏基准 `84px`。
+Footer 高度会随 layout profile 变化：圆屏基准 `188px`，方屏基准 `84px`。默认 footer 不只是可选按钮区域，也承担底部安全留白，避免最后一屏内容被系统底部区域截断；没有帮助按钮需求时保留默认 `footer: {}` 即可。只有在你自行追加等效底部 `SPACER` 或完全自定义页面底部时，才建议传 `footer: false`。
 
 ### listWidget
 
@@ -344,7 +344,7 @@ const height = list.getProperty(listProp.HEIGHT)
 - 手指滑动或表冠/滚轮滚动开始后隐藏焦点；滚动停止后焦点落到屏幕中心最近项
 - display-only `TEXT` / `IMAGE` / `CATEGORY` 进入焦点序列，但不显示焦点框、不触发动作
 - `header: false` 不创建 header
-- `footer: false` 不创建 footer
+- `footer: false` 不创建 footer；这会移除默认底部安全留白，通常只适合已自行追加底部 `SPACER` 或自定义底部区域的页面
 - `hideStatusBar` 默认隐藏状态栏
 - Touch tap is cancelled on any actual pointer movement to avoid accidental row activation while scrolling
 
@@ -458,6 +458,8 @@ Page({
 | `debugScroll` | Print `[ZOList.scroll]` diagnostic logs | `false` |
 
 The public API does not expose `x/y/w/h`. The list always starts at `x=0, y=0` and uses the active layout profile size. If you keep the status bar visible, insert a top `SPACER` when needed.
+
+Keep the default footer (`footer: {}`) even when you do not need a visible help button. The footer also provides bottom safe spacing so the last screen of content is not clipped by the system bottom area. Use `footer: false` only when you add equivalent bottom spacing yourself or fully own the page bottom.
 
 Tune scroll multipliers in `createListPage()`:
 
