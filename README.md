@@ -93,6 +93,7 @@ Page({
 | `crownEnable` | 是否注册 `onDigitalCrown` 处理表冠/滚轮滚动 | `true` |
 | `crownStep` | 表冠/滚轮 `degree` 到滚动像素的倍率；数值越大滚轮滚动越快 | `2.5` |
 | `crownSettleMs` | 表冠/滚轮停止后等待多久重建焦点 | `180` |
+| `crownVibrate` | 表冠停止后中心条目发生切换时触发一次短而强的振动 | `true` |
 | `debugScroll` | 输出 `[ZOList.scroll]` 诊断日志 | `false` |
 
 公开 API 不提供 `x/y/w/h`。列表始终从 `x=0, y=0` 开始，宽高由当前屏幕 profile 决定。若你选择 `hideStatusBar: false` 并需要避让状态栏，可以在列表顶部插入 `SPACER`。
@@ -112,6 +113,7 @@ list.createWidget(listWidget.SPACER, { h: 64 })
 const list = createListPage({
   touchScrollStep: 1,  // 触屏滑动倍率，默认 1
   crownStep: 2.5,     // 表冠/滚轮倍率，默认 2.5
+  crownVibrate: true, // 条目切换时短-强振动，默认开启
 })
 ```
 
@@ -461,6 +463,7 @@ Page({
 | `crownEnable` | Register `onDigitalCrown` for crown/wheel scrolling | `true` |
 | `crownStep` | Multiplier from crown/wheel `degree` to scroll pixels; larger values scroll faster | `2.5` |
 | `crownSettleMs` | Delay before rebuilding focus after crown/wheel input settles | `180` |
+| `crownVibrate` | Trigger one short, strong vibration when crown settling changes the centered item | `true` |
 | `debugScroll` | Print `[ZOList.scroll]` diagnostic logs | `false` |
 
 The public API does not expose `x/y/w/h`. The list always starts at `x=0, y=0` and uses the active layout profile size. If you keep the status bar visible, insert a top `SPACER` when needed.
@@ -479,6 +482,7 @@ Tune scroll multipliers in `createListPage()`:
 const list = createListPage({
   touchScrollStep: 1,  // touch drag multiplier, default 1
   crownStep: 2.5,     // crown/wheel multiplier, default 2.5
+  crownVibrate: true, // short, strong feedback on item switch, enabled by default
 })
 ```
 

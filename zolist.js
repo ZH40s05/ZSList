@@ -9,6 +9,7 @@ import {
   onKey, offKey, onDigitalCrown, offDigitalCrown, KEY_UP, KEY_DOWN, KEY_SELECT, KEY_HOME, KEY_BACK,
   KEY_EVENT_CLICK, KEY_EVENT_PRESS, KEY_EVENT_RELEASE,
 } from '@zos/interaction'
+import { Vibrator, VIBRATOR_SCENE_SHORT_STRONG } from '@zos/sensor'
 import { push as routerPush } from '@zos/router'
 import { getDeviceInfo, SCREEN_SHAPE_SQUARE } from '@zos/device'
 
@@ -454,6 +455,8 @@ export class ListPage {
     this.crownEnable = param.crownEnable !== false
     this.crownStep = param.crownStep === undefined ? 2.5 : param.crownStep
     this.crownSettleMs = param.crownSettleMs === undefined ? 180 : param.crownSettleMs
+    this.crownVibrate = param.crownVibrate !== false
+    this._vibrator = null
     this.touchScrollStep = param.touchScrollStep === undefined ? 1 : param.touchScrollStep
     this._scrollAnim = null
     this._scrollPos = 0
@@ -988,9 +991,23 @@ export class ListPage {
       this._dragging = false
       const idx = this._nearestToCenter()
       this._debugScroll('crown_settle', undefined, 'idx=' + idx)
-      if (idx >= 0) this._setFocus(idx, false)
+      if (idx >= 0) {
+        const changed = idx !== this.focusIdx
+        this._setFocus(idx, false)
+        if (changed) this._vibrateCrownSwitch()
+      }
     }, this.crownSettleMs)
     return true
+  }
+
+  _vibrateCrownSwitch() {
+    if (!this.crownVibrate) return
+    try {
+      if (!this._vibrator) this._vibrator = new Vibrator()
+      this._vibrator.start({ mode: VIBRATOR_SCENE_SHORT_STRONG })
+    } catch (e) {
+      this._debugScroll('crown_vibrate_error', undefined, 'err=' + this._debugValue(e))
+    }
   }
 
   _onKey(key, ev) {
