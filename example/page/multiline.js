@@ -1,5 +1,5 @@
 import { showToast } from '@zos/interaction'
-import { createListPage, listWidget } from '../utils/zolist'
+import { createListPage, listWidget } from '../utils/zslist'
 
 Page({
   build() {

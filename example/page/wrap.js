@@ -1,6 +1,6 @@
 import { text_style } from '@zos/ui'
 import { showToast } from '@zos/interaction'
-import { createListPage, listWidget } from '../utils/zolist'
+import { createListPage, listWidget } from '../utils/zslist'
 
 const LONG_TITLE = '这是一段很长的主标题文字,用于验证默认 text_style.WRAP 会自动换行并撑高当前列表行'
 const LONG_SUBTITLE = '这是一段很长的副标题说明文字,用于验证复合标题行在主标题和副标题同时换行时仍能正确计算总高度、图标位置和焦点遮罩高度。'

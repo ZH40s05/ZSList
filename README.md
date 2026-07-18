@@ -1,4 +1,4 @@
-# zolist — ZeppOS 官方风格列表控件 / ZeppOS Official List Control
+# ZSList — ZeppOS 风格列表控件 / ZeppOS-style List Component
 
 [中文](#中文) | [English](#english)
 
@@ -8,7 +8,7 @@
 
 ### 是什么
 
-**zolist** 将 ZeppOS 官方列表页常见的页面结构封装成一个页面级组合控件，适合需要官方风格列表、物理按键焦点、触屏点击、表冠/滚轮滚动和圆屏/方屏适配的小程序页面：
+**ZSList** 将 ZeppOS 风格列表页常见的页面结构封装成一个页面级组合控件，适合需要系统风格列表、物理按键焦点、触屏点击、表冠/滚轮滚动和圆屏/方屏适配的小程序页面：
 
 1. **官方风格行布局** — `TEXT` / `SWITCH` / `CHECKBOX` / `RADIO` / `CATEGORY` / `FOOTER` / `IMAGE`
 2. **物理按键焦点** — UP/DOWN 环绕导航，SELECT/HOME 触发当前项
@@ -27,10 +27,10 @@ const item = list.createWidget(listWidget.SWITCH, RowParam)
 
 ```bash
 # npm
-npm install @zh40s05/zepp-official-list
+npm install @zh40s05/zslist
 
 # 手动复制
-cp zolist.js your-app/utils/zolist.js
+cp zslist.js your-app/utils/zslist.js
 ```
 
 资源文件需要放入小程序 `assets/default.r/`。如果同时支持方屏目标，也需要放入 `assets/default.s/`。
@@ -39,7 +39,7 @@ cp zolist.js your-app/utils/zolist.js
 
 ```js
 import { showToast } from '@zos/interaction'
-import { createListPage, listWidget } from '../utils/zolist'
+import { createListPage, listWidget } from '../utils/zslist'
 
 Page({
   build() {
@@ -80,7 +80,7 @@ Page({
 | `listWidget` | 子控件类型常量，类似官方 `widget` |
 | `listProp` | 属性常量，用于 `getProperty` / `setProperty` |
 | `ListPage` | 列表页面类，通常不需要直接实例化 |
-| `zolistDispose()` | 手动清理当前列表实例；一般只在高级场景使用 |
+| `zslistDispose()` | 手动清理当前列表实例；一般只在高级场景使用 |
 
 ### createListPage 参数
 
@@ -94,7 +94,7 @@ Page({
 | `crownStep` | 表冠/滚轮 `degree` 到滚动像素的倍率；数值越大滚轮滚动越快 | `2.5` |
 | `crownSettleMs` | 表冠/滚轮停止后等待多久结束滚动状态并做最终焦点校准 | `180` |
 | `crownVibrate` | 表冠实时中心条目发生切换时振动；新 API 为 20ms 短强，旧 API 为实测短中降级 | `true` |
-| `debugScroll` | 输出 `[ZOList.scroll]` 诊断日志 | `false` |
+| `debugScroll` | 输出 `[ZSList.scroll]` 诊断日志 | `false` |
 
 公开 API 不提供 `x/y/w/h`。列表始终从 `x=0, y=0` 开始，宽高由当前屏幕 profile 决定。若你选择 `hideStatusBar: false` 并需要避让状态栏，可以在列表顶部插入 `SPACER`。
 
@@ -267,7 +267,7 @@ list.createWidget(listWidget.SPACER, { height: 32 })
 
 ### 圆屏/方屏适配
 
-ZOList 通过 `@zos/device.getDeviceInfo().screenShape` 自动选择布局 profile，并使用屏幕宽度做整体缩放。
+ZSList 通过 `@zos/device.getDeviceInfo().screenShape` 自动选择布局 profile，并使用屏幕宽度做整体缩放。
 
 需要权限：
 
@@ -394,9 +394,9 @@ zeus build
 
 ### What
 
-**zolist** is an official-style ZeppOS list page control for mini-program pages that need native-looking rows, physical-key focus, touch feedback, crown/wheel scrolling, and round/square screen adaptation. It wraps common list page building blocks into one page-level component:
+**ZSList** is a community-maintained ZeppOS-style list component for mini-program pages that need native-looking rows, physical-key focus, touch feedback, crown/wheel scrolling, and round/square screen adaptation. It wraps common list page building blocks into one page-level component:
 
-1. Official-style rows: `TEXT`, `SWITCH`, `CHECKBOX`, `RADIO`, `CATEGORY`, `FOOTER`, `IMAGE`
+1. ZeppOS-style rows: `TEXT`, `SWITCH`, `CHECKBOX`, `RADIO`, `CATEGORY`, `FOOTER`, `IMAGE`
 2. Physical-key focus navigation
 3. Touch press feedback
 4. Deferred touch-scroll focus landing and real-time crown/wheel focus switching
@@ -407,8 +407,8 @@ It is not a built-in ZeppOS widget, but the API intentionally resembles `createW
 ### Install
 
 ```bash
-npm install @zh40s05/zepp-official-list
-cp zolist.js your-app/utils/zolist.js
+npm install @zh40s05/zslist
+cp zslist.js your-app/utils/zslist.js
 ```
 
 Copy runtime assets into `assets/default.r/`; copy them into `assets/default.s/` as well when building for square screens.
@@ -417,7 +417,7 @@ Copy runtime assets into `assets/default.r/`; copy them into `assets/default.s/`
 
 ```js
 import { showToast } from '@zos/interaction'
-import { createListPage, listWidget } from '../utils/zolist'
+import { createListPage, listWidget } from '../utils/zslist'
 
 Page({
   build() {
@@ -452,7 +452,7 @@ Page({
 | `listWidget` | Widget type constants |
 | `listProp` | Property constants for `getProperty` / `setProperty` |
 | `ListPage` | List page class |
-| `zolistDispose()` | Manually dispose the current list instance |
+| `zslistDispose()` | Manually dispose the current list instance |
 
 ### createListPage Options
 
@@ -466,11 +466,11 @@ Page({
 | `crownStep` | Multiplier from crown/wheel `degree` to scroll pixels; larger values scroll faster | `2.5` |
 | `crownSettleMs` | Delay before ending crown/wheel scrolling state and running final focus calibration | `180` |
 | `crownVibrate` | Vibrate on each real-time centered-item change from crown input; 20ms strong-short on the scene API, tested short-medium fallback on the legacy API | `true` |
-| `debugScroll` | Print `[ZOList.scroll]` diagnostic logs | `false` |
+| `debugScroll` | Print `[ZSList.scroll]` diagnostic logs | `false` |
 
 The public API does not expose `x/y/w/h`. The list always starts at `x=0, y=0` and uses the active layout profile size. If you keep the status bar visible, insert a top `SPACER` when needed.
 
-Crown haptics use capability detection instead of a hard-coded OS version. When the API_LEVEL 3.6 scene API is available, ZOList uses `getType()` and a 20ms `STRONG_SHORT` action. If that API is missing or fails, it falls back to the API_LEVEL 2.0 `setMode(VIBRATOR_SCENE_DURATION)` → `start()` sequence. Shimmer true-device testing found that this legacy mode maps to a short-medium pulse on affected old firmware, so the fallback is an intentional downgrade. The exact firmware version that fixed the legacy mode mapping is unknown.
+Crown haptics use capability detection instead of a hard-coded OS version. When the API_LEVEL 3.6 scene API is available, ZSList uses `getType()` and a 20ms `STRONG_SHORT` action. If that API is missing or fails, it falls back to the API_LEVEL 2.0 `setMode(VIBRATOR_SCENE_DURATION)` → `start()` sequence. Shimmer true-device testing found that this legacy mode maps to a short-medium pulse on affected old firmware, so the fallback is an intentional downgrade. The exact firmware version that fixed the legacy mode mapping is unknown.
 
 Keep the default footer (`footer: {}`) even when you do not need a visible help button. The footer also provides bottom safe spacing so the last screen of content is not clipped by the system bottom area. Use `footer: false` only when you add equivalent bottom spacing yourself or fully own the page bottom.
 
@@ -507,7 +507,7 @@ Display-only `TEXT`, `IMAGE`, and `CATEGORY` entries are still part of the focus
 
 ### Screen Adaptation
 
-ZOList reads `getDeviceInfo().screenShape` and selects a round or square layout profile. It then scales layout, font, focus, footer controls, and image limits by screen width.
+ZSList reads `getDeviceInfo().screenShape` and selects a round or square layout profile. It then scales layout, font, focus, footer controls, and image limits by screen width.
 
 Requires `"data:os.device.info"` in `app.json` on runtimes that enforce device info permissions.
 

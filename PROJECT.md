@@ -1,11 +1,11 @@
-# Zepp Official List Project Notes
+# ZSList Project Notes
 
 ## Scope
 
-- Type: ZeppOS page-level list library with a bundled example app
+- Type: community-maintained ZeppOS-style page-level list library with a bundled example app
 - Status: maintained library
 - Target devices: round 480px and square 390px example profiles
-- Entry files: `zolist.js`, `example/utils/zolist.js`
+- Entry files: `zslist.js`, `example/utils/zslist.js`
 
 ## Current Behavior
 
@@ -18,7 +18,7 @@
 
 - Package check: `npm pack --dry-run`
 - Example build: run `zeus build` in `example/`
-- True-device note: a directly compiled example on Balance only vibrated after switching to the documented `setMode()` → `start()` sequence; the new scene path and legacy fallback still require follow-up device verification.
+- True-device note: the directly compiled ZSList example passed the target Balance interaction test: touch focus changes after release, crown focus changes in real time, and the overall behavior substantially matches the restoration target. On that device vibration only worked after switching to the documented `setMode()` → `start()` sequence.
 
 ## Local Decisions
 
@@ -37,7 +37,7 @@
 
 ## Dependencies And Reuse
 
-- Shared code: keep `zolist.js` and `example/utils/zolist.js` identical.
+- Shared code: keep `zslist.js` and `example/utils/zslist.js` identical.
 - Reusable ZeppOS docs consumed: official `Vibrator` API (legacy API_LEVEL 2.0 and scene API_LEVEL 3.6) plus `NormalApps/已提交/Shimmer/page/page.js` true-device mappings.
 - Knowledge conclusion type: official API plus true-device confirmed compatibility behavior.
 

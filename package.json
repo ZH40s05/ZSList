@@ -1,21 +1,21 @@
 {
-  "name": "@zh40s05/zepp-official-list",
+  "name": "@zh40s05/zslist",
   "version": "0.1.4",
-  "description": "ZeppOS 官方风格列表控件：支持按键焦点、触屏焦点和表冠滚动 / Official-style ZeppOS list control with key focus, touch focus and crown scrolling",
-  "main": "zolist.js",
+  "description": "ZSList：支持按键焦点、触屏焦点和表冠滚动的 ZeppOS 风格列表控件 / A ZeppOS-style list component with key focus, touch focus and crown scrolling",
+  "main": "zslist.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ZH40s05/Zepp-Official-List.git"
+    "url": "git+https://github.com/ZH40s05/ZSList.git"
   },
-  "homepage": "https://github.com/ZH40s05/Zepp-Official-List#readme",
+  "homepage": "https://github.com/ZH40s05/ZSList#readme",
   "bugs": {
-    "url": "https://github.com/ZH40s05/Zepp-Official-List/issues"
+    "url": "https://github.com/ZH40s05/ZSList/issues"
   },
   "publishConfig": {
     "access": "public"
   },
   "files": [
-    "zolist.js",
+    "zslist.js",
     "example/"
   ],
   "directories": {
@@ -29,7 +29,8 @@
     "Amazfit",
     "focus",
     "scroll",
-    "crown"
+    "crown",
+    "zslist"
   ],
   "author": "ZHAO",
   "license": "MIT"

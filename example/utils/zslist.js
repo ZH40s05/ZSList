@@ -1,5 +1,5 @@
 /**
- * zolist.js — ZeppOS Official-style List Page Library
+ * zslist.js — ZSList, a ZeppOS-style List Page Library
  * ZeppOS 官方风格列表页面控件
  *
  * 设计目标: 用接近 createWidget(widget.X, Param) 的方式创建官方风格列表页。
@@ -130,7 +130,7 @@ const ASSET = {
 const HOLD_MS = 1000
 
 let currentListPage = null
-const LIST_STATE_KEY = '__zolistPageState'
+const LIST_STATE_KEY = '__zslistPageState'
 
 function scaledValue(v, scale) {
   return Math.max(1, Math.round(v * scale))
@@ -1139,7 +1139,7 @@ export class ListPage {
     const scrollY = typeof read.posY === 'number' ? Math.max(0, -read.posY) : 'na'
     const frameText = frame === undefined ? '' : ' frame=' + this._debugValue(frame)
     console.log(
-      '[ZOList.scroll] ' + tag +
+      '[ZSList.scroll] ' + tag +
       frameText +
       ' more_pos_y=' + this._debugValue(read.posY) +
       ' more_state=' + read.state +
@@ -1235,6 +1235,6 @@ export function createListPage(param = {}) {
   return new ListPage(param)
 }
 
-export function zolistDispose() {
+export function zslistDispose() {
   if (currentListPage) currentListPage.dispose()
 }
