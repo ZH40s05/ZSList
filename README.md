@@ -6,13 +6,7 @@
 
 ## 界面预览 / Screenshots
 
-| 主菜单 / Main menu | 复合标题条目 / Composite text row |
-| --- | --- |
-| <img src="asset/screenshot-main-menu.png" alt="ZSList 示例主菜单" width="240"> | <img src="asset/screenshot-composite-text-row.png" alt="ZSList 复合标题条目" width="240"> |
-
-| 开关与复选框 / Switch and checkbox | 单选框 / Radio |
-| --- | --- |
-| <img src="asset/screenshot-switch-row.png" alt="ZSList 开关和复选框条目" width="240"> | <img src="asset/screenshot-radio-row.png" alt="ZSList 单选框条目" width="240"> |
+<p align="center"><img src="asset/screenshot-main-menu.png" alt="ZSList 示例主菜单" width="240"></p>
 
 ## 中文
 
@@ -211,6 +205,19 @@ list.createWidget(listWidget.TEXT, {
 - 有 `clickable: true` 或 `click_func`：显示右箭头，显示行焦点框，响应触屏和物理确认键
 - 有 `subtitle`：自动使用双行/复合标题布局
 - 左侧 `icon` 和右侧箭头都会按当前 profile 尺寸自动等比缩放
+<img src="asset/screenshot-composite-text-row.png" alt="ZSList 复合标题条目" width="240">
+
+#### 开关条目 / Switch row
+
+<img src="asset/screenshot-switch-row.png" alt="ZSList 开关条目" width="240">
+
+#### 复选框条目 / Checkbox row
+
+<img src="asset/screenshot-checkbox-row.png" alt="ZSList 复选框条目" width="240">
+
+#### 单选框条目 / Radio row
+
+<img src="asset/screenshot-radio-row.png" alt="ZSList 单选框条目" width="240">
 
 ### ImageParam
 
